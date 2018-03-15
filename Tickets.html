@@ -1,0 +1,106 @@
+<html>
+  <head>
+    <style>
+      table, th, td {
+        border: 1px solid black;
+      }
+    </style>
+    <script>
+      function init() {
+        this.tickets = [
+          /*{value: 3, quantity: 2},
+          {value: 1.5, quantity: 2}*/
+        ];
+
+        this.elements = {
+          serverAddress: document.getElementById("serverAddress"),
+          wantedValue: document.getElementById("wantedValue"),
+          marginValue: document.getElementById("marginValue"),
+          ticketValue: document.getElementById("ticketValue"),
+          ticketQuantity: document.getElementById("ticketQuantity"),
+          ticketsList: document.getElementById("ticketsList"),
+          exactList: document.getElementById("exactList"),
+          belowList: document.getElementById("belowList"),
+          belowMarginList: document.getElementById("belowMarginList"),
+          exactMarginList: document.getElementById("exactMarginList"),
+
+        }
+
+        document.getElementById("findCombinations").addEventListener("click", () => {
+          getCombinations(this.elements.serverAddress.value, this.elements.wantedValue.value, this.elements.marginValue.value, this.tickets);
+        });
+
+        document.getElementById("addTicket").addEventListener("click", () => {
+          addTicket(this.elements.ticketValue.value, this.elements.ticketQuantity.value);
+        });
+      }
+
+      function getCombinations(server, wanted, margin, tickets) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            const combinations = JSON.parse(this.responseText);
+            setResult(combinations);
+          }
+        };
+        xhttp.open("POST", server + "/combinations", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("wanted=" + wanted + "&margin=" + margin + "&tickets=" + JSON.stringify(tickets));
+      }
+
+      function addTicket(value, quantity) {
+        this.tickets.push({ value, quantity });
+        ticketsList.innerHTML += "Value: " + value + "  Quantity: " + quantity + "<br />";
+        this.elements.ticketValue.value = "";
+        this.elements.ticketQuantity.value = "";
+      }
+
+      function setResult(result) {
+        this.elements.exactList.innerHTML = result.exact.map((ticket) => JSON.stringify(ticket) + "<br />").join("");
+        this.elements.belowList.innerHTML = result.below.map((ticket) => JSON.stringify(ticket) + "<br />").join("");
+        this.elements.belowMarginList.innerHTML = result.belowMargin.map((ticket) => JSON.stringify(ticket) + "<br />").join("");
+        this.elements.exactMarginList.innerHTML = result.exactMargin.map((ticket) => JSON.stringify(ticket) + "<br />").join("");
+      }
+    </script>
+  </head>
+  <body>
+    <label for="serverAddress">Server IP</label>
+    <input id="serverAddress" type="text" value="http://localhost:9000"/>
+    <label for="wantedValue">Amount to pay</label>
+    <input id="wantedValue" type="text" value="10"/>
+    <label for="marginValue">Margin</label>
+    <input id="marginValue" type="text" value="0"/>
+    <input id="findCombinations" type="button" value="Find combinations" />
+    <br />
+    <br />
+    <label for="ticketValue">Ticket amount</label>
+    <input id="ticketValue" type="text" />
+    <label for="ticketQuantity">Quantity</label>
+    <input id="ticketQuantity" type="text" />
+    <input id="addTicket" type="button" value="Add ticket" />
+    <div id="ticketsList"></div>
+    <br />
+    <br />
+    <table>
+      <tr>
+        <th>Exact</th>
+        <th>Below</th>
+      </tr>
+      <tr>
+        <td id="exactList"></td>
+        <td id="belowList"></td>
+      </tr>
+      <tr>
+        <th>Below margin</th>
+        <th>Exact margin</th>
+      </tr>
+      <tr>
+        <td id="belowMarginList"></td>
+        <td id="exactMarginList"></td>
+      </tr>
+    </table>
+    <script>
+      init();
+    </script>
+  </body>
+</html>
