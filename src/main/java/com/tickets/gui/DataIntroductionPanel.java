@@ -7,6 +7,7 @@ import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,8 +16,12 @@ import javax.swing.JTextField;
 import com.tickets.rest.domain.Ticket;
 
 public class DataIntroductionPanel extends Panel {
-	
+
+	private static final long serialVersionUID = 1L;
+
 	GridBagConstraints c = new GridBagConstraints();
+	
+	JPanel dataPanel;
 	
 	JLabel wantedLabel;
 	JTextField wantedField;
@@ -33,7 +38,8 @@ public class DataIntroductionPanel extends Panel {
 	TicketsComponent ticketsComponent;
 	
 	public DataIntroductionPanel() {
-		this.setLayout(new GridBagLayout());
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		dataPanel = new JPanel(new GridBagLayout());
 		addWanted();
 		addMargin();
 		addFindButton();
@@ -42,16 +48,18 @@ public class DataIntroductionPanel extends Panel {
 		addTicketQuantity();
 		addNewTicketButton();
 		
-		addTicketComponent();
+		this.add(dataPanel);
+		addTicketComponent();		
 	}
 	
 	private void addTicketComponent() {
 		ticketsComponent = new TicketsComponent();
 		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridwidth = 3;
 		c.weightx = 0.5;
 		c.gridx = 0;
 		c.gridy = 3;
-		this.add(ticketsComponent, c);
+		dataPanel.add(ticketsComponent, c);
 	}
 
 	private void addTicketValue() {
@@ -65,7 +73,7 @@ public class DataIntroductionPanel extends Panel {
 		c.weightx = 0.5;
 		c.gridx = 0;
 		c.gridy = 1;
-		this.add(panel, c);
+		dataPanel.add(panel, c);
 	}
 	
 	private void addTicketQuantity() {
@@ -79,7 +87,7 @@ public class DataIntroductionPanel extends Panel {
 		c.weightx = 0.5;
 		c.gridx = 1;
 		c.gridy = 1;
-		this.add(panel, c);
+		dataPanel.add(panel, c);
 	}
 	
 	private void addNewTicketButton() {
@@ -93,7 +101,7 @@ public class DataIntroductionPanel extends Panel {
 		c.weightx = 0.5;
 		c.gridx = 2;
 		c.gridy = 1;
-		this.add(findButton, c);
+		dataPanel.add(findButton, c);
 	}
 
 	private void addTicketAction() {
@@ -112,7 +120,7 @@ public class DataIntroductionPanel extends Panel {
 		c.weightx = 0.5;
 		c.gridx = 0;
 		c.gridy = 0;
-		this.add(panel, c);
+		dataPanel.add(panel, c);
 	}
 	
 	private void addMargin() {
@@ -126,7 +134,7 @@ public class DataIntroductionPanel extends Panel {
 		c.weightx = 0.5;
 		c.gridx = 1;
 		c.gridy = 0;
-		this.add(panel, c);
+		dataPanel.add(panel, c);
 	}
 	
 	private void addFindButton() {
@@ -140,11 +148,18 @@ public class DataIntroductionPanel extends Panel {
 		c.weightx = 0.5;
 		c.gridx = 2;
 		c.gridy = 0;
-		this.add(findButton, c);
+		dataPanel.add(findButton, c);
 	}
 	
 	private void findAction() {
-		
+		try {
+			double wanted = Double.parseDouble(wantedField.getText());
+			double margin = Double.parseDouble(marginField.getText());
+			GUIController.getInstance().findCombinations(wanted, margin);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void setSize() {

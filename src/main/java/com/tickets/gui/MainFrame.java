@@ -1,12 +1,9 @@
 package com.tickets.gui;
 
 import java.awt.Dimension;
-import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 public class MainFrame extends JFrame {
 	DataIntroductionPanel dataIntroductionPanel;
