@@ -50,8 +50,6 @@ public class DataIntroductionPanel extends Panel {
 		
 		this.add(dataPanel);
 		addTicketComponent();
-
-
 	}
 	
 	private void addTicketComponent() {

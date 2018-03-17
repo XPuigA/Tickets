@@ -2,15 +2,16 @@ package com.tickets.gui;
 
 import com.tickets.rest.domain.Finder;
 import com.tickets.rest.domain.Result;
-import com.tickets.rest.domain.Tickets;
 
 public class GUIController {
 	private ObservableTickets tickets;
+	private ObservableResult result;
 	private static GUIController instance;
-	private Result result;
+	
 	
 	private GUIController() {
 		tickets = new ObservableTickets();
+		result = new ObservableResult();
 	}
 	
 	public static GUIController getInstance() {
@@ -25,6 +26,10 @@ public class GUIController {
 	}
 
 	public void findCombinations(double wantedValue, double margin) {
-		result = Finder.find(wantedValue, margin, tickets.getTickets());
+		result.setResult(Finder.find(wantedValue, margin, tickets.getTickets()));
+	}
+
+	public ObservableResult getResult() {
+		return result;
 	}
 }

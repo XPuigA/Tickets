@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Filter {
-    public static Result filter(Tickets tickets, Result toFilter) {
+    public static Result<Tickets> filter(Tickets tickets, Result toFilter) {
         Result<Tickets> filteredResult = new Result<>();
         filteredResult.setExact(filterList(tickets, toFilter.getExact()));
         filteredResult.setBelow(filterList(tickets, toFilter.getBelow()));

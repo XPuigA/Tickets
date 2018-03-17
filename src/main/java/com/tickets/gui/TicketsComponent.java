@@ -29,7 +29,7 @@ public class TicketsComponent extends JPanel implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		this.removeAll();
-		for (Ticket ticket: GUIController.getInstance().getTickets().getTickets().getTickets().values())
+		for (Ticket ticket: GUIController.getInstance().getTickets().getTicketList())
 			this.add(new JLabel("Value: " + ticket.getValue() + " Quantity: " + ticket.getQuantity()));
 		this.revalidate();
 

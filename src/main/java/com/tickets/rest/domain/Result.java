@@ -1,6 +1,5 @@
 package com.tickets.rest.domain;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Result<T> {

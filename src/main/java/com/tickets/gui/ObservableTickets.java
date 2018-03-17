@@ -3,6 +3,7 @@ package com.tickets.gui;
 import com.tickets.rest.domain.Ticket;
 import com.tickets.rest.domain.Tickets;
 
+import java.util.Collection;
 import java.util.Observable;
 
 public class ObservableTickets extends Observable {
@@ -16,5 +17,9 @@ public class ObservableTickets extends Observable {
 
     public Tickets getTickets() {
         return tickets;
+    }
+    
+    public Collection<Ticket> getTicketList() {
+    	return this.tickets.getTickets().values();
     }
 }
