@@ -49,7 +49,9 @@ public class DataIntroductionPanel extends Panel {
 		addNewTicketButton();
 		
 		this.add(dataPanel);
-		addTicketComponent();		
+		addTicketComponent();
+
+
 	}
 	
 	private void addTicketComponent() {

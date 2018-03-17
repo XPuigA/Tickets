@@ -5,12 +5,12 @@ import com.tickets.rest.domain.Result;
 import com.tickets.rest.domain.Tickets;
 
 public class GUIController {
-	private Tickets tickets;
+	private ObservableTickets tickets;
 	private static GUIController instance;
 	private Result result;
 	
 	private GUIController() {
-		tickets = new Tickets();
+		tickets = new ObservableTickets();
 	}
 	
 	public static GUIController getInstance() {
@@ -20,11 +20,11 @@ public class GUIController {
 		return instance;
 	}
 	
-	public Tickets getTickets() {
+	public ObservableTickets getTickets() {
 		return tickets;
 	}
 
 	public void findCombinations(double wantedValue, double margin) {
-		result = Finder.find(wantedValue, margin, tickets);
+		result = Finder.find(wantedValue, margin, tickets.getTickets());
 	}
 }
