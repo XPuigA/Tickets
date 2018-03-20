@@ -3,6 +3,8 @@ package com.tickets.gui;
 import com.tickets.rest.domain.Ticket;
 import com.tickets.rest.domain.Tickets;
 
+import actions.TicketsActions;
+
 import java.util.Collection;
 import java.util.Observable;
 
@@ -12,7 +14,13 @@ public class ObservableTickets extends Observable {
     public void add(Ticket t) {
         tickets.add(t);
         setChanged();
-        notifyObservers(t);
+        notifyObservers(TicketsActions.ADD);
+    }
+    
+    public void remove(Ticket t) {
+    	tickets.remove(t);
+    	setChanged();
+    	notifyObservers(TicketsActions.REMOVE);
     }
 
     public Tickets getTickets() {

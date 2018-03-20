@@ -1,5 +1,6 @@
 package com.tickets.gui;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -9,17 +10,17 @@ import javax.swing.JFrame;
 public class MainFrame extends JFrame {
 	DataIntroductionPanel dataIntroductionPanel;
 	ResultsPanel resultsPanel;
-	BoxLayout layout;
+	BorderLayout layout;
 	
 	public MainFrame() {
-		layout = new BoxLayout(getContentPane(), BoxLayout.Y_AXIS);
+		layout = new BorderLayout();
 		this.setLayout(layout);
 		
 		dataIntroductionPanel = new DataIntroductionPanel();
-		this.add(dataIntroductionPanel);
+		this.add(dataIntroductionPanel, BorderLayout.PAGE_START);
 		
 		resultsPanel = new ResultsPanel();
-		this.add(resultsPanel);
+		this.add(resultsPanel, BorderLayout.CENTER);
 		
 		this.setTitle("Ticket combinator");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

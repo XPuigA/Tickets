@@ -1,12 +1,9 @@
 package com.tickets.gui;
 
 import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.tickets.rest.domain.Ticket;
-import com.tickets.rest.domain.Tickets;
-
 import java.util.Observable;
 import java.util.Observer;
 
@@ -30,8 +27,7 @@ public class TicketsComponent extends JPanel implements Observer {
 	public void update(Observable o, Object arg) {
 		this.removeAll();
 		for (Ticket ticket: GUIController.getInstance().getTickets().getTicketList())
-			this.add(new JLabel("Value: " + ticket.getValue() + " Quantity: " + ticket.getQuantity()));
+			this.add(new TicketComponent(ticket));
 		this.revalidate();
-
 	}
 }

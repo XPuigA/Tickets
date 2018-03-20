@@ -92,4 +92,8 @@ public class Tickets {
         }
         return spreadedTickets;
     }
+    
+    public boolean remove(Ticket t) {
+    	return tickets.remove(t.getValue()) != null;
+    }
 }

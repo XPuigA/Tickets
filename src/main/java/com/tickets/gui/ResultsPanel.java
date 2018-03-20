@@ -37,25 +37,25 @@ public class ResultsPanel extends JPanel implements Observer {
 	}
 	
 	private void addLabels() {
-		c.fill = GridBagConstraints.NORTHWEST;
+		c.fill = GridBagConstraints.LINE_START;
 		c.weightx = 0.5;
 		c.gridx = 0;
 		c.gridy = 0;
 		this.add(getTitleLabel("Exact value"), c);
 		
-		c.fill = GridBagConstraints.NORTHEAST;
+		c.fill = GridBagConstraints.LINE_END;
 		c.weightx = 0.5;
 		c.gridx = 1;
 		c.gridy = 0;
 		this.add(getTitleLabel("Below value"), c);
 		
-		c.fill = GridBagConstraints.SOUTHWEST;
+		c.fill = GridBagConstraints.LINE_START;
 		c.weightx = 0.5;
 		c.gridx = 0;
 		c.gridy = 2;
 		this.add(getTitleLabel("Below margin"), c);
 		
-		c.fill = GridBagConstraints.SOUTHEAST;
+		c.fill = GridBagConstraints.LINE_END;
 		c.weightx = 0.5;
 		c.gridx = 1;
 		c.gridy = 2;
@@ -65,7 +65,7 @@ public class ResultsPanel extends JPanel implements Observer {
 	private void initializePanels() {
 		exactPanel = new JPanel();
 		exactPanel.setLayout(new BoxLayout(exactPanel, BoxLayout.Y_AXIS));
-		c.fill = GridBagConstraints.NORTHWEST;
+		c.fill = GridBagConstraints.LINE_START;
 		c.weightx = 0.5;
 		c.gridx = 0;
 		c.gridy = 1;
@@ -73,7 +73,7 @@ public class ResultsPanel extends JPanel implements Observer {
 		
 		belowPanel = new JPanel();
 		belowPanel.setLayout(new BoxLayout(belowPanel, BoxLayout.Y_AXIS));
-		c.fill = GridBagConstraints.NORTHEAST;
+		c.fill = GridBagConstraints.LINE_END;
 		c.weightx = 0.5;
 		c.gridx = 1;
 		c.gridy = 1;
@@ -81,7 +81,7 @@ public class ResultsPanel extends JPanel implements Observer {
 		
 		belowMarginPanel = new JPanel();
 		belowMarginPanel.setLayout(new BoxLayout(belowMarginPanel, BoxLayout.Y_AXIS));
-		c.fill = GridBagConstraints.SOUTHWEST;
+		c.fill = GridBagConstraints.LINE_START;
 		c.weightx = 0.5;
 		c.gridx = 0;
 		c.gridy = 3;
@@ -89,7 +89,7 @@ public class ResultsPanel extends JPanel implements Observer {
 		
 		exactMarginPanel = new JPanel();
 		exactMarginPanel.setLayout(new BoxLayout(exactMarginPanel, BoxLayout.Y_AXIS));
-		c.fill = GridBagConstraints.SOUTHEAST;
+		c.fill = GridBagConstraints.LINE_END;
 		c.weightx = 0.5;
 		c.gridx = 1;
 		c.gridy = 3;
