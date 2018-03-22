@@ -1,9 +1,8 @@
 package com.tickets.gui;
 
+import com.tickets.gui.actions.TicketsActions;
 import com.tickets.rest.domain.Ticket;
 import com.tickets.rest.domain.Tickets;
-
-import actions.TicketsActions;
 
 import java.util.Collection;
 import java.util.Observable;

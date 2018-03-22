@@ -16,10 +16,10 @@ public class ResultsPanel extends JPanel implements Observer {
 
 	GridBagConstraints c = new GridBagConstraints();
 	
-	JPanel exactPanel;
-	JPanel belowPanel;
-	JPanel belowMarginPanel;
-	JPanel exactMarginPanel;
+	ResultsTicketList exactPanel;
+	ResultsTicketList belowPanel;
+	ResultsTicketList belowMarginPanel;
+	ResultsTicketList exactMarginPanel;
 	
 	ResultsPanel() {
 		this.setLayout(new GridBagLayout());
@@ -63,32 +63,28 @@ public class ResultsPanel extends JPanel implements Observer {
 	}
 
 	private void initializePanels() {
-		exactPanel = new JPanel();
-		exactPanel.setLayout(new BoxLayout(exactPanel, BoxLayout.Y_AXIS));
+		exactPanel = new ResultsTicketList();
 		c.fill = GridBagConstraints.LINE_START;
 		c.weightx = 0.5;
 		c.gridx = 0;
 		c.gridy = 1;
 		this.add(exactPanel, c);
 		
-		belowPanel = new JPanel();
-		belowPanel.setLayout(new BoxLayout(belowPanel, BoxLayout.Y_AXIS));
+		belowPanel = new ResultsTicketList();
 		c.fill = GridBagConstraints.LINE_END;
 		c.weightx = 0.5;
 		c.gridx = 1;
 		c.gridy = 1;
 		this.add(belowPanel, c);
 		
-		belowMarginPanel = new JPanel();
-		belowMarginPanel.setLayout(new BoxLayout(belowMarginPanel, BoxLayout.Y_AXIS));
+		belowMarginPanel = new ResultsTicketList();
 		c.fill = GridBagConstraints.LINE_START;
 		c.weightx = 0.5;
 		c.gridx = 0;
 		c.gridy = 3;
 		this.add(belowMarginPanel, c);
 		
-		exactMarginPanel = new JPanel();
-		exactMarginPanel.setLayout(new BoxLayout(exactMarginPanel, BoxLayout.Y_AXIS));
+		exactMarginPanel = new ResultsTicketList();
 		c.fill = GridBagConstraints.LINE_END;
 		c.weightx = 0.5;
 		c.gridx = 1;
@@ -105,33 +101,21 @@ public class ResultsPanel extends JPanel implements Observer {
 		setExactMargin(result.getExactMargin());
 		this.revalidate();
 	}
-
-	private void fillPanel(JPanel panel, HashSet<Tickets> ticketResult) {
-		panel.invalidate();
-		panel.removeAll();
-		for (Tickets tickets : ticketResult) {
-			StringBuilder sb = new StringBuilder();
-			for (Ticket ticket: tickets.getTickets().values()) {
-				sb.append("[V: " + ticket.getValue() + " Q: " + ticket.getQuantity() + "]");
-			}
-			panel.add(new JLabel(sb.toString()));
-		}
-	}
 	
 	private void setExact(HashSet<Tickets> tickets) {
-		fillPanel(exactPanel, tickets);
+		exactPanel.update(tickets);
 	}
 	
 	private void setBelow(HashSet<Tickets> tickets) {
-		fillPanel(belowPanel, tickets);
+		belowPanel.update(tickets);
 	}
 	
 	private void setBelowMargin(HashSet<Tickets> tickets) {
-		fillPanel(belowMarginPanel, tickets);
+		belowMarginPanel.update(tickets);
 	}
 	
 	private void setExactMargin(HashSet<Tickets> tickets) {
-		fillPanel(exactMarginPanel, tickets);
+		exactMarginPanel.update(tickets);
 	}
 	
 }
